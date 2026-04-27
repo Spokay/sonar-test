@@ -1,6 +1,10 @@
 pipeline {
     agent { label 'ssh-agent' }
 
+    tools {
+        nodejs 'node-25'
+    }
+
     stages {
         stage('SCM') {
            steps {
