@@ -3,14 +3,17 @@ pipeline {
 
     stages {
         stage('SCM') {
-            checkout scm
-          }
+           steps {
+                git branch: 'master', url: 'https://github.com/Spokay/sonar-test.git'
+           }
         stage('SonarQube Analysis') {
-            def scannerHome = tool 'SonarScanner';
-            withSonarQubeEnv() {
-                sh "${scannerHome}/bin/sonar-scanner"
+            steps {
+                def scannerHome = tool 'SonarScanner';
+                withSonarQubeEnv() {
+                    sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
-        }
+        }}
     }
 }
 
